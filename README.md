@@ -1,8 +1,6 @@
 # PKECA
 Code for PKECA
 
-The code will be released.
-
 
 # [COMIND 2025] PKECA code
 
