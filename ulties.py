@@ -60,26 +60,8 @@ def data_make(file_gou):
     matrix = feas
     labels = label
 
-    'PIE'
-    # 遍历矩阵的每一列（即每个特征）   特征编码
-    for i in range(matrix.shape[1]):
-        # 取出特定的特征值
-        feature_values = matrix[:, i]
-        # 用特征值和对应的标签创建一个pandas数据框
-        feature_df = pd.DataFrame({'values': feature_values, 'labels': labels})
-        # 按照标签对值进行分组，并对每个组进行求和
-        sum_df = feature_df.groupby('labels').sum()
-        # 找出和最大的标签
-        max_label = sum_df['values'].idxmax()
-        # 创建一个掩码，标记出哪些样本的标签是和最大的标签
-        # mask = (labels == max_label)
-        mask = (labels != max_label)
-        # 将和最大的标签不对应的所有特征值置为0
-        matrix[mask, i] = 0
-
-        mask_mask = (labels == max_label)
-        # 将和最大的标签对应的所有特征值置为1
-        matrix[mask_mask, i] = 1
+    'z-score 标准化'
+    matrix = preprocessing.scale(matrix,axis = 0)
 
     # data_bearing_canshu = np.ones((4000,1500))
     data_bearing_canshu = np.ones((num_c * len(ran), num))
